@@ -35,46 +35,54 @@ const carouselRight = document.querySelector('.carousel-right');
 
 
 for (let i = 0; i < items.length; i++) {
-    let imagesLeft = `<img src="${items[i]}" alt="">`;
+    let images = `<img src="${items[i]}" alt="">`;
     // console.log(imagesLeft);
-    let imagesRight = `<div class ="container-img-right"><img src="${items[i]}" alt=""></div>`;
+    let dot = `<div class ="container-img-right"><img src="${items[i]}" alt=""></div>`;
 
-    carouselLeft.innerHTML += imagesLeft;
-    carouselRight.innerHTML += imagesRight;
+    carouselLeft.innerHTML += images;
+    carouselRight.innerHTML += dot;
+    // console.log(imagesLeft, imagesRight);
 }
 
-const imagesLeftDom = document.querySelectorAll('.carousel-left img');
-const imagesRightDom = document.querySelectorAll('.carousel-right img');
-// console.log(imagesLeftDom);
 
-imagesLeftDom[0].classList.add('first', 'active');
-imagesLeftDom[imagesLeftDom.length - 1].classList.add('last');
-imagesRightDom[0].classList.add('first', 'active');
-imagesRightDom[imagesRightDom.length - 1].classList.add('last');
+const imagesDom = document.querySelectorAll('.carousel-left img');
+const dotDom = document.querySelectorAll('.carousel-right img');
+
+
+imagesDom[0].classList.add('first', 'active');
+imagesDom[imagesDom.length - 1].classList.add('last');
+dotDom[0].classList.add('first', 'active');
+dotDom[dotDom.length - 1].classList.add('last');
 
 const nextButton = document.querySelector('.next');
 const prevButton = document.querySelector('.prev');
 
-nextButton.addEventListener('click', 
-function() {
-    const imageLeftActive = document.querySelector('.carousel-left .active');
-    const imageRightActive = document.querySelector('.carousel-right .active');
+nextButton.addEventListener('click', function () {
 
-    let classes = imageLeftActive.classList;
+    let imagesActive = document.querySelector('.container-img-left .active');
+    let dotActive = document.querySelector('.container-img-right .active');
+
+    let classes = imagesActive.classList;
 
     let last = false;
-    for (let i = 0; i < classes.length; i++) {
 
-        if (classes == 'last') {
+    for (let i = 0; i < classes.length; i++) {
+        if (classes[i] == 'last') {
             last = true;
-        } 
+            console.log(classes[i]);
+        }
     }
 
     if (last == false) {
-        imageLeftActive.classList.remove('active');
+        imagesActive.classList.remove('active');
+        dotActive.classList.remove('active');
 
-        const imgLeftNext = imageLeftActive.nextElementSibling;
+        const imgNext = imagesActive.nextElementSibling;
+        imgNext.classList.add('active');
+        const dotNext = dotActive.nextElementSibling;
+        dotNext.classList.add('active');
     } else {
         nextButton.classList.remove('able');
     }
+
 });
