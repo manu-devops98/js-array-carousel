@@ -32,7 +32,12 @@
 .carousel-left .container-img-left img {
     width: 100%;
     height: 100%;
+    display: none;
     object-fit: cover;
+}
+
+.carousel-left .container-img-left img.active {
+    display: block;
 }
 
 .carousel-left .container-text {
@@ -58,7 +63,6 @@
 .carousel-right .container-img-right {
     width: 100%;
     height: 20%;
-    /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 .carousel-right .container-img-right img {
@@ -70,23 +74,27 @@
 
 .carousel-right .container-img-right img.active {
     filter: none;
-    border: 4px solid white;
+    border: 2px solid white;
 }
 
 .carousel-right .prev {
     position: absolute;
     top: 10px;
-    left: 50%;transform: translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     background-color: lightgrey;
     padding: 0.3em;
     border-radius: 50%;
+    z-index: 1;
 }
 
 .carousel-right .next {
     position: absolute;
     bottom: 10px;
-    left: 50%;transform: translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     background-color: lightgrey;
     padding: 0.3em;
     border-radius: 50%;
+    z-index: 1;
 }
