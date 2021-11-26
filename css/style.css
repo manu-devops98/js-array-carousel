@@ -7,94 +7,109 @@
 .container {
     width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.slider {
-    width: 80%;
-    height: 400px;
-    display: flex;
-}
-
-.carousel-left {
-    width: 85%;
-    height: 100%;
     position: relative;
 }
 
-.carousel-left .container-img-left {
-    width: 100%;
+.slider {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 70%;
+    display: flex;
+}
+
+.slider .col-left {
+    width: 85%;
     height: 100%;
 }
 
-.carousel-left .container-img-left img {
+.slider .col-left .img-container {
+    position: relative;
     width: 100%;
     height: 100%;
     display: none;
-    object-fit: cover;
 }
 
-.carousel-left .container-img-left img.active {
+.slider .col-left .img-container.active {
     display: block;
 }
 
-.carousel-left .container-text {
-    color: white;
+.slider .col-left .img-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.slider .col-left .text-container {
     position: absolute;
     bottom: 20px;
     right: 20px;
+    color: white;
     text-align: right;
 }
 
-.carousel-left .container-text h2 {
-    color: #D2D6E9;
-}
-
-.carousel-right {
+.slider .col-right {
     width: 15%;
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 
-.carousel-right .container-img-right {
+.col-right .thumb-container {
     width: 100%;
-    height: 20%;
+    height: calc(100% / 5);
+    position: relative;
 }
 
-.carousel-right .container-img-right img {
+.col-right .thumb-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: invert(0.2);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
-.carousel-right .container-img-right img.active {
-    filter: none;
+.col-right .thumb-container.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background-color: transparent;
     border: 2px solid white;
 }
 
-.carousel-right .prev {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: lightgrey;
-    padding: 0.3em;
-    border-radius: 50%;
-    z-index: 1;
+.col-right .thumb-container img {
+    width: 100%;
+    height: 100%;
 }
 
-.carousel-right .next {
+.col-right .prev,
+.col-right .next {
     position: absolute;
-    bottom: 10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%);
+    padding: 0.1em;
+    z-index: 2;
+    font-size: 1.5em;
     background-color: lightgrey;
-    padding: 0.3em;
     border-radius: 50%;
-    z-index: 1;
+}
+
+.col-right .prev:hover,
+.col-right .next:hover {
+    background-color: white;
+}
+
+.col-right .prev {
+    top: 10px;
+}
+
+.col-right .next {
+    bottom: 10px;
 }
