@@ -43,7 +43,6 @@ const imageContainer = document.querySelector('.slider .col-left');
 const thumbContainer = document.querySelector('.slider .col-right');
 
 for (let i = 0; i < items.length; i++) {
-    
     let classElement = '';
 
     if (i == 0) {
@@ -51,15 +50,16 @@ for (let i = 0; i < items.length; i++) {
     } else if (i == items.length - 1) {
         classElement = 'last';
     }
-    
+
     const image = `
         <div class="img-container ${classElement}">
             <img src="${items[i]}" alt="">
-             <div class="text-container">
-                <h2>${title[i]}</h2>
-                <p>${text[i]}</p>
+        <div class="text-container">
+            <h2>${title[i]}</h2>
+            <p>${text[i]}</p>
         </div>
     `;
+
     const thumb = `
     <div class="thumb-container ${classElement}">
         <img src="${items[i]}" alt="">
@@ -71,79 +71,76 @@ for (let i = 0; i < items.length; i++) {
 }
 
 const nextButton = document.querySelector('.slider .col-right .next');
-const prevButton = document.querySelector('.col-right .prev');
+const prevButton = document.querySelector('.slider .col-right .prev');
 
-nextButton.addEventListener('click', 
+
+nextButton.addEventListener('click',
 function() {
-    const elementActive = document.querySelector('.slider .col-left .img-container.active');
+    const imageActive = document.querySelector('.slider .col-left .img-container.active');
     const thumbActive = document.querySelector('.slider .col-right .thumb-container.active');
+    const classes = imageActive.classList;
+    const nextImage = imageActive.nextElementSibling;
+    const nextThumb = thumbActive.nextElementSibling;
 
-    const listClasses = elementActive.classList;
-    // console.log(listClasses);
+    const firstImage = document.querySelector('.slider .col-left .img-container.first');
+    const firstThumb = document.querySelector('.slider .col-right .thumb-container.first');
+    const lastImage = document.querySelector('.slider .col-left .img-container.last');
+    const lastThumb = document.querySelector('.slider .col-right .thumb-container.last');
 
     let last = false;
-  for (let i = 0; i < listClasses.length; i++) {
-
-      if (listClasses[i] == 'last') {
-          last = true;
-      }   
+    for (let i = 0; i < classes.length; i++) {
+        if (classes[i] == 'last') {
+            last = true;
+        }   
     }
 
-    let lastThumb = thumbActive.classList.contains('last');
 
-    // console.log(lastThumb);
-
-    if (last == false) {
-        elementActive.classList.remove('active');
-
-        const elementNext = elementActive.nextElementSibling;
-
-        elementNext.classList.add('active');
-    } 
-
-    if (lastThumb == false) {
+    if (last) {
+        imageActive.classList.remove('active');
+        lastImage.classList.remove('active');
+        lastThumb.classList.remove('active');
+        firstImage.classList.add('active');
+        firstThumb.classList.add('active');
+    } else {
+        imageActive.classList.remove('active');
+        nextImage.classList.add('active');
         thumbActive.classList.remove('active');
-        const thumbNext = thumbActive.nextElementSibling;
-        thumbNext.classList.add('active');
-
-    } 
-
+        nextThumb.classList.add('active');
+    }
 });
 
-prevButton.addEventListener('click', 
+prevButton.addEventListener('click',
 function() {
-    const elementActive = document.querySelector('.slider .col-left .img-container.active');
+    const imageActive = document.querySelector('.slider .col-left .img-container.active');
     const thumbActive = document.querySelector('.slider .col-right .thumb-container.active');
-    
-    const listClasses = elementActive.classList;
-    // console.log(listClasses);
+    const classes = imageActive.classList;
+    const nextImage = imageActive.previousElementSibling;
+    const nextThumb = thumbActive.previousElementSibling;
+
+    const firstImage = document.querySelector('.slider .col-left .img-container.first');
+    const firstThumb = document.querySelector('.slider .col-right .thumb-container.first');
+    const lastImage = document.querySelector('.slider .col-left .img-container.last');
+    const lastThumb = document.querySelector('.slider .col-right .thumb-container.last');
 
     let first = false;
-  for (let i = 0; i < listClasses.length; i++) {
-
-      if (listClasses[i] == 'first') {
-          first = true;
-      }   
+    for (let i = 0; i < classes.length; i++) {
+        if (classes[i] == 'first') {
+            first = true;
+        }   
     }
 
-    let lastThumb = thumbActive.classList.contains('first');
 
-    // console.log(lastThumb);
+    if (first) {
+        imageActive.classList.remove('active');
+        firstImage.classList.remove('active');
+        firstThumb.classList.remove('active');
+        lastImage.classList.add('active');
+        lastThumb.classList.add('active');
 
-    if (first == false) {
-        elementActive.classList.remove('active');
-
-        const elementNext = elementActive.previousElementSibling;
-
-        elementNext.classList.add('active');
-    } 
-
-    if (lastThumb == false) {
+    } else {
+        imageActive.classList.remove('active');
+        nextImage.classList.add('active');
         thumbActive.classList.remove('active');
-        const thumbNext = thumbActive.previousElementSibling;
-        thumbNext.classList.add('active');
-
-    } 
-
-
+        nextThumb.classList.add('active');
+    }
 });
